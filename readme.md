@@ -1,3 +1,5 @@
+3obby did not build this, only made it worse with an addition of code that reminds me of a plumber I once hired...
+
 # dashboard
 
 A little webpage that my raspberry pi home server displays. It shows weather and a QR code that you can use to sign into the WiFi.

@@ -12,10 +12,12 @@ window.geolocation = {
         longitude: -86.5856698
 }
 getNOAAData()
+getOpenWeather()
 getSunTimes()
 setInterval(() => {
     getNOAAData()
     getSunTimes()
+    getOpenWeather()
 }, 1800000)
 
 const clock = {
@@ -145,6 +147,30 @@ async function getSunTimes(location) {
     sunriseDisplay.innerText = sunTimes.sunrise
     sunsetDisplay.innerText = sunTimes.sunset
 }
+async function getOpenWeather(location) {
+    if (!window.geolocation.latitude) {
+        window.geolocation.latitude = location.coords.latitude
+        window.geolocation.longitude = location.coords.longitude
+    }
+    const response = await getResource(`https://api.openweathermap.org/data/2.5/weather?lat=${window.geolocation.latitude.toFixed(4)}&lon=${window.geolocation.longitude.toFixed(4)}&appid=0690cb2957e452544f23b4f49538cc75&units=imperial`)
+    
+    console.log("data:");
+    console.log(response);
+    var curTemp = response.main.temp;
+    var curConds = response.weather[0].main;
+
+    const tempDisplay = document.querySelector('.weather .now .temp')
+    const statusDisplay = document.querySelector('.weather .now .status')
+    const overlayTempDisplay = document.querySelector('.weather-overlay .now .temp')
+    const overlayStatusDisplay = document.querySelector('.weather-overlay .now .status')
+
+    tempDisplay.innerText = curTemp + '°'
+    statusDisplay.innerText = curConds
+    overlayTempDisplay.innerText = curTemp + '°'
+    overlayStatusDisplay.innerText = curConds
+    //updateDisplay(linkedData)
+}
+
 async function getNOAAData(location) {
     if (!window.geolocation.latitude) {
         window.geolocation.latitude = location.coords.latitude
@@ -176,15 +202,6 @@ async function getNOAAData(location) {
 }
 
 function updateDisplay(linkedData) {
-    const tempDisplay = document.querySelector('.weather .now .temp')
-    const statusDisplay = document.querySelector('.weather .now .status')
-    const overlayTempDisplay = document.querySelector('.weather-overlay .now .temp')
-    const overlayStatusDisplay = document.querySelector('.weather-overlay .now .status')
-
-    tempDisplay.innerText = celToFahr(linkedData.station.latest.properties.temperature.value) + '°'
-    statusDisplay.innerText = linkedData.station.latest.properties.textDescription
-    overlayTempDisplay.innerText = celToFahr(linkedData.station.latest.properties.temperature.value) + '°'
-    overlayStatusDisplay.innerText = linkedData.station.latest.properties.textDescription
 
     const tempsCanvas = document.createElement('canvas')
     tempsCanvas.width = 748
