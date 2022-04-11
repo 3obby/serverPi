@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src='assets/chart.min.js'></script>
+    <script src='assets/chartjs-plugin-datalabels.min.js'></script>
+    <script src='assets/chartConfigs.js'></script>
+    <script defer src="script.js"></script>
+</head>
+
+<body>
+    <div class='clock'>
+        <div class='time'></div>
+        <div class='date'></div>
+    </div>
+    <button class='weather'>
+        <div class='now'>
+            <div class='temp'></div>
+            <div class='status'></div>
+        </div>
+        <div class='sunrise'>
+            <img src='assets/weather/wi-sunrise.svg'>
+            <span></span>
+        </div>
+        <div class='sunset'>
+            <img src='assets/weather/wi-sunset.svg'>
+            <span></span>
+        </div>
+    </button>
+    <button class='wifi'>
+        <img src='assets/wifi.svg'>WiFi
+    </button>
+    <button class='vibe'>
+        <img src='assets/vibe.svg'>Vibe
+    </button>
+    <div class='overlays'>
+        <div class='vibe-overlay'>
+            <video muted loop src="assets/vibe.mp4"></video>
+            <div class='controls'>
+                <button>GUIDE<br>THE<br>VIBE</button>
+                <div class='indicator'><span>0</span> BPM</div>
+            </div>
+            <button class='close'></button>
+        </div>
+        <div class='wifi-overlay'>
+            <div>
+                <div>Scan to Sign In</div>
+                <img src='assets/qr.png'>
+            </div>
+            <button class='close'></button>
+        </div>
+        <div class='weather-overlay'>
+            <div class='transform-container'>
+                <div class='now'>
+                    <span>Now:</span>
+                    <span class='temp'><span></span></span>
+                    <span class='status'><span></span></span>
+                </div>
+                <div class='days'>
+                    <button>
+                        <div class='name'></div>
+                        <div class='temp'></div>
+                        <div class='temp-range'>
+                            <div class='min'></div>
+                            <div class='max'></div>
+                        </div>
+                    </button>
+                    <button>
+                        <div class='name'></div>
+                        <div class='temp'></div>
+                        <div class='temp-range'>
+                            <div class='min'></div>
+                            <div class='max'></div>
+                        </div>
+                    </button>
+                    <button>
+                        <div class='name'></div>
+                        <div class='temp'></div>
+                        <div class='temp-range'>
+                            <div class='min'></div>
+                            <div class='max'></div>
+                        </div>
+                    </button>
+                    <button>
+                        <div class='name'></div>
+                        <div class='temp'></div>
+                        <div class='temp-range'>
+                            <div class='min'></div>
+                            <div class='max'></div>
+                        </div>
+                    </button>
+                    <button>
+                        <div class='name'></div>
+                        <div class='temp'></div>
+                        <div class='temp-range'>
+                            <div class='min'></div>
+                            <div class='max'></div>
+                        </div>
+                    </button>
+                    <button>
+                        <div class='name'></div>
+                        <div class='temp'></div>
+                        <div class='temp-range'>
+                            <div class='min'></div>
+                            <div class='max'></div>
+                        </div>
+                    </button>
+                    <button>
+                        <div class='name'></div>
+                        <div class='temp'></div>
+                        <div class='temp-range'>
+                            <div class='min'></div>
+                            <div class='max'></div>
+                        </div>
+                    </button>
+                </div>
+                <div class='hours'>
+                    <div class='day'>
+                        <h3 class='date'></h3>
+                        <h4 class='temps-chart'>Temperature</h4>
+                        <img class='temps-chart'>
+                        <h4 class='precip-chart'>Chance of Precipitation</h4>
+                        <img class='precip-chart'>
+                    </div>
+                    <div class='day'>
+                        <h3 class='date'></h3>
+                        <h4 class='temps-chart'>Temperature</h4>
+                        <img class='temps-chart'>
+                        <h4 class='precip-chart'>Chance of Precipitation</h4>
+                        <img class='precip-chart'>
+                    </div>
+                    <div class='day'>
+                        <h3 class='date'></h3>
+                        <h4 class='temps-chart'>Temperature</h4>
+                        <img class='temps-chart'>
+                        <h4 class='precip-chart'>Chance of Precipitation</h4>
+                        <img class='precip-chart'>
+                    </div>
+                    <div class='day'>
+                        <h3 class='date'></h3>
+                        <h4 class='temps-chart'>Temperature</h4>
+                        <img class='temps-chart'>
+                        <h4 class='precip-chart'>Chance of Precipitation</h4>
+                        <img class='precip-chart'>
+                    </div>
+                    <div class='day'>
+                        <h3 class='date'></h3>
+                        <h4 class='temps-chart'>Temperature</h4>
+                        <img class='temps-chart'>
+                        <h4 class='precip-chart'>Chance of Precipitation</h4>
+                        <img class='precip-chart'>
+                    </div>
+                    <div class='day'>
+                        <h3 class='date'></h3>
+                        <h4 class='temps-chart'>Temperature</h4>
+                        <img class='temps-chart'>
+                        <h4 class='precip-chart'>Chance of Precipitation</h4>
+                        <img class='precip-chart'>
+                    </div>
+                    <div class='day'>
+                        <h3 class='date'></h3>
+                        <h4 class='temps-chart'>Temperature</h4>
+                        <img class='temps-chart'>
+                        <h4 class='precip-chart'>Chance of Precipitation</h4>
+                        <img class='precip-chart'>
+                    </div>
+                </div>
+            </div>
+            <button class='close'></button>
+        </div>
+    </div>
+</body>
+
+</html>

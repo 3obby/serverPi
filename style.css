@@ -1,0 +1,389 @@
+@import url('assets/fonts/fonts.css');
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    background: transparent;
+}
+body {
+    user-select: none;
+    cursor: none;
+    height: 480px;
+    width: 800px;
+    position: relative;
+    margin: 0 auto;
+    padding: 0;
+    background-color: rgb(48,53,66);
+    background-image: url(assets/bg.webp);
+    background-size: 800px 480px;
+    background-position: top center;
+    background-repeat: no-repeat;
+    color: white;
+    --text-color: white;
+    --overlay-bg: rgba(48,53,66,.65);
+}
+button {
+    cursor: none;
+}
+body > * {
+    position: absolute;
+}
+.clock,.weather,.wifi, .vibe {
+    filter: drop-shadow(0 0 4px black)
+}
+
+.clock {
+    top: 1rem;
+    left: 1.5rem;
+    text-align: right;
+    padding: 0 0 .35rem 0;
+    border-bottom: .25rem solid var(--text-color)
+}
+.clock .time {
+    font: 7rem/1 Inter;
+    letter-spacing: -.05em;
+    font-variation-settings: 'wght' 475
+}
+.clock .date {
+    font: 1.5rem/1 Inter;
+    letter-spacing: -.02em;
+    font-variation-settings: 'wght' 750
+}
+.weather,.wifi,.vibe {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    color: var(--text-color);
+}
+
+.weather {
+    bottom: 1rem;
+    left: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr auto; 
+    grid-template-rows: 1fr 1fr; 
+    grid-template-areas: 
+        "now ."
+        "now ."; 
+}
+.weather .now {
+    grid-area: now;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.weather .now .temp {
+    font: 3rem/1 Inter;
+    font-variation-settings: 'wght' 750;
+}
+.weather .now .status {
+    font: 1.25rem/1 Inter;
+    font-variation-settings: 'wght' 400;
+}
+.weather .sunrise,
+.weather .sunset {
+    display: flex;
+    align-items: center;
+    margin-left: .5rem;
+    font: 1.5rem/1 Inter;
+    font-variation-settings: 'wght' 550;
+}
+.weather .sunrise img,
+.weather .sunset img {
+    width: 2.5rem;
+}
+
+.wifi {
+    bottom: 1rem;
+    right: 1.5rem;
+    display: flex;
+    align-items: center;
+    font: 2rem/1 Inter;
+    font-variation-settings: 'wght' 750;
+}
+.wifi img {
+    height: 2rem;
+    margin: 0 .25rem 0 0;
+}
+.vibe {
+    top: 1rem;
+    right: 1.5rem;
+    display: flex;
+    align-items: center;
+    font: 2rem/1 Inter;
+    font-variation-settings: 'wght' 750;
+}
+.vibe img {
+    height: 2rem;
+    margin: 0 .25rem 0 0;
+}
+.overlays > * {
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+    top: 0;
+    left: 0;
+    background-image: url(assets/overlay-bg.png);
+    background-size: 800px 480px;
+    background-position: top center;
+    background-repeat: no-repeat;
+}
+.overlays button.close {
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+    border: 0;
+    background-image: url(assets/close.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 1.25rem;
+    position: absolute;
+    top: .5rem;
+    right: 1rem;
+}
+
+.wifi-overlay,
+.vibe-overlay {
+    transition: .3s opacity;
+}
+body.vibing-transition .vibe-overlay {
+    visibility: visible;
+    width: 800px;
+    height: 480px;
+    opacity: 0;
+    display: block;
+}
+body.vibing-overlaid .vibe-overlay {
+    opacity: 1;
+    width: 800px;
+    height: 480px;
+    display: block;
+    visibility: visible;
+}
+.vibe-overlay {
+    background-image: url(assets/bg.webp);
+}
+.vibe-overlay video {
+    width: 800px;
+    height: 480px;
+}
+.vibe-overlay .controls {
+    position: absolute;
+    width: 400px;
+    height: 480px;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.controls button {
+    font: 3rem/1.25 Inter;
+    font-variation-settings: 'wght' 900, 'slnt' -10;
+    color: white;
+    width: 200px;
+    background-image: url(assets/guide-bg.png);
+    padding: 1rem 1.5rem;
+    border-radius: 1rem;
+    border: 0;
+    transition: transform .025s;
+}
+
+.controls .indicator {
+    box-sizing: border-box;
+    text-align: center;
+    border-radius: .5rem;
+    font: 1rem/1.5 Inter;
+    font-variation-settings: 'wght' 500;
+    width:140px;
+    margin-top: 1rem;
+    padding: 1rem 0;
+    background: url(assets/indicator-bg.png)
+}
+.controls .indicator span {
+    font: 1.5rem/1 Inter;
+    font-variation-settings: 'wght' 700;
+}
+
+body.wifi-transition .wifi-overlay {
+    display: grid;
+    visibility: visible;
+    width: 800px;
+    height: 480px;
+    display: grid;
+    place-items: center;
+    opacity: 0;
+}
+
+body.wifi-overlaid .wifi-overlay {
+    width: 800px;
+    height: 480px;
+    display: grid;
+    visibility: visible;
+    place-items: center;
+    opacity: 1;
+}
+.wifi-overlay > div {
+    background: white;
+    width: 200px;
+    padding: .5rem;
+    font-size: 0;
+    border-radius: .5rem;
+    transform: translateY(0px);
+    transition: .2s transform;
+}
+.wifi-overlaid .wifi-overlay > div {
+    transform: translateY(10px)
+}
+.wifi-overlay > div > div {
+    text-align: center;
+    font: 1.5rem/1 Inter;
+    color: black;
+    font-variation-settings: 'wght' 800;
+    margin-bottom: .25rem;
+}
+.wifi-overlay > div > img {
+    width: 100%;
+}
+.weather-overlay {
+    transition: .3s opacity;
+}
+.weather-transition .weather-overlay {
+    width: 800px;
+    height: 480px;
+    visibility: visible;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+}
+.weather-overlaid .weather-overlay {
+    width: 800px;
+    height: 480px;
+    visibility: visible;
+    opacity: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.weather-overlay .transform-container {
+    transform: translateY(-10px);
+    flex-direction: column;
+    display: flex;
+    width: 800px;
+    height: 480px;
+    transition: .2s transform;
+}
+.weather-overlaid .weather-overlay .transform-container {
+    transform: translateY(0px);
+}
+
+.weather-overlay .now {
+    flex: 0 0 2.5rem;
+    display: flex;
+    width: min-content;
+    white-space: nowrap;
+    overflow-x:hidden;
+    align-items: center;
+    border-radius: 1.25rem;
+    margin: .5rem 4rem .5rem 1rem;
+    padding: 0 1rem;
+    background: var(--overlay-bg)
+}
+.weather-overlay .now > :not(:last-child) {
+    margin-right: .5ch;
+}
+.weather-overlay .days {
+    display: flex;
+    margin: 0 1rem;
+    justify-content: center;
+}
+.weather-overlay .days button {
+    display: none;
+    position: relative;
+    transition: .2s flex-grow;
+    flex-grow: 0;
+    background: var(--overlay-bg);
+    color: var(--text-color);
+    margin: 0 .25rem;
+    border: 0;
+    border-radius: .5rem;
+    padding: .5rem;
+}
+.weather-overlay .days button.selected {
+    flex-grow: 1;
+}
+.weather-overlay .days button.populated {
+    display: block;
+}
+.days > button > .temp-range {
+    display: flex;
+    margin: 0 auto;
+    justify-content: space-between;
+    font: .8rem/1 Inter;
+    border-radius: .65rem;
+    background: linear-gradient(90deg, #038 0%, #a02 100%);
+    width: 4rem;
+    font-variation-settings: 'wght' 450;
+    padding: .25rem;
+}
+
+.days > button > .name {
+    font: 1rem/1 Inter;
+    font-variation-settings: 'wght' 500;
+    letter-spacing: -.05ch;
+    transition: .2s font-variation-settings, .2s letter-spacing;
+}
+
+.days > button > .temp {
+    margin: .25rem 0;
+    font: 2rem/1 Inter;
+    font-variation-settings: 'wght' 600;
+}
+.weather-overlay .days button.selected .name {
+    font-variation-settings: 'wght' 800;
+    letter-spacing: 0;
+}
+.weather-overlay .days button.selected::after {
+   content: "";
+   position: absolute;
+   top: 100%;
+   left: calc(50% - .5rem);
+   border-top: .5rem solid black;
+   border-top-color: var(--overlay-bg); 
+   border-left: .5rem solid transparent;
+   border-right: .5rem solid transparent; 
+}
+.weather-overlay .hours {
+    display: flex;
+    margin: .5rem 1rem;
+    background: var(--overlay-bg);
+    flex-grow: 1;
+    border-radius: .5rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.weather-overlay .hours > .day {
+    display: none;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: flex-start;
+    overflow: hidden;
+}
+.weather-overlay .hours > .day.active {
+    display: flex;
+}
+.weather-overlay .hours .date {
+    margin: 8px 1rem;
+    font-variation-settings: 'wght' 450;
+}
+.weather-overlay .hours h4 {
+    margin: 0 1rem;
+    font-variation-settings: 'wght' 350;
+}
+.weather-overlay .hours h4.precip-chart {
+    margin-top: auto;
+}
